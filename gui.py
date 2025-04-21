@@ -1,6 +1,7 @@
 import sys
 from PySide6.QtWidgets import (QWidget, QApplication, QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QComboBox)
-from PySide6.QtCore import Slot
+from PySide6.QtCore import Slot, QObject
+from PySide6.QtGui import QKeyEvent
 from __feature__ import snake_case, true_property
 
 my_app = QApplication([])
@@ -27,8 +28,10 @@ class GUI(QWidget):
         hbox.add_widget(my_btn6)
         hbox.add_widget(my_btn7)
         hbox.add_widget(my_btn8)
-        
         self.set_layout(hbox)
+    def keyPressEvent(self, event: QKeyEvent):
+        key = event.key()
+        print(f"Found key {key}!")
 
 
 app = GUI()
