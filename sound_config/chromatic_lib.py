@@ -1,14 +1,6 @@
 def frequency_to_note_table(frequencies):
-  """Converts a list of frequencies to a 2D list of [frequency, note, octave].
 
-  Args:
-    frequencies: A list of frequencies (in Hz).
-
-  Returns:
-    A 2D list where each sublist is [frequency, note, octave].
-  """
-
-  notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+  notes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", ]
   note_table = []
 
   for freq in frequencies:
@@ -19,14 +11,38 @@ def frequency_to_note_table(frequencies):
     # Calculate the note and octave
     note_index = (semitones % 12)
     octave = 4 + (semitones // 12)
+    octave += 1
 
     note = notes[note_index]
+    if notes[note_index] == "A" or notes[note_index] == "A#" or notes[note_index] == "B":
+       octave -= 1
     note_table.append([freq, note, octave])
 
   return note_table
 
 import math
 
-frequencies = [82.41, 87.31, 92.5, 98.0, 103.83, 110.0, 116.54, 123.47, 130.81, 138.59, 146.83, 155.56, 164.82, 174.62, 185.0, 196.0, 207.66, 220.0, 233.08, 246.94, 261.62, 277.18, 293.66, 311.12, 329.64, 349.24, 370.0, 392.0, 415.32, 440.0, 466.16, 493.88, 523.24, 554.36, 587.32, 622.24, 659.28, 698.48, 740.0, 784.0, 830.64, 880.0, 932.32, 987.76, 1046.48, 1108.72, 1174.64, 1244.48, 1318.56, 1396.96, 1480.0, 1568.0, 1661.28, 1760.0, 1864.64, 1975.52, 2092.96, 2217.44, 2349.28, 2488.96, 2637.12, 2793.92, 2960.0, 3136.0, 3322.56, 3520.0, 3729.28, 3951.04, 4185.92, 4434.88, 4698.56, 4977.92]
+def remove_duplicates_ordered(input_list):
+    seen = set()
+    result = []
+    for item in input_list:
+        if item not in seen:
+            seen.add(item)
+            result.append(item)
+    return result
+
+def chromatic_geneator():
+  base_notes = [27.50,29.14,30.87,32.70,34.65,36.71,38.89,41.20,43.65,46.25,49.00,51.91]
+  chromatic_list = []
+  for note in base_notes:
+    for octave in range(8):
+      frequency = note * (2 ** octave)
+      chromatic_list.append(frequency)
+  chromatic_list.sort()
+  remove_duplicates_ordered(chromatic_list)
+  del chromatic_list[88:96]
+  return chromatic_list
+
+frequencies = chromatic_geneator()
 
 note_dict = frequency_to_note_table(frequencies)
