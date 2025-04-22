@@ -26,7 +26,6 @@ def scaleplayer(index_note):
     harmonic_minor_scale_step.sort(reverse=True)
     for note in harmonic_minor_scale_step:
         notePlayer(scale[index_note+note][0],1)
-    print(scale[index_note])
-scaleplayer(48)
+
 
 
