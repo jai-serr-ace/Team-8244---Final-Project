@@ -8,15 +8,6 @@ def generate_sine_wave(frequency, duration, sample_rate=44100):
     amplitude = 0.5 * np.sin(2 * np.pi * frequency * t)
     return amplitude
 
-def remove_duplicates_ordered(input_list):
-    seen = set()
-    result = []
-    for item in input_list:
-        if item not in seen:
-            seen.add(item)
-            result.append(item)
-    return result
-
 def notePlayer(my_note, length):
     duration_seconds = length
     sample_rate = 48000
@@ -30,7 +21,10 @@ def scaleplayer(index_note):
     major_scale_step = [0,2,4,5,7,9,11,12]
     minor_scale_step = [0,2,3,5,7,8,10,12]
     harmonic_minor_scale_step = [0,2,3,5,7,8,11,12]
-    for note in major_scale_step:
+    for note in harmonic_minor_scale_step:
+        notePlayer(scale[index_note+note][0],1)
+    harmonic_minor_scale_step.sort(reverse=True)
+    for note in harmonic_minor_scale_step:
         notePlayer(scale[index_note+note][0],1)
 
 
