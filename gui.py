@@ -27,7 +27,6 @@ class GUI(QWidget):
         hbox.add_widget(my_btn6)
         hbox.add_widget(my_btn7)
         hbox.add_widget(my_btn8)
-        
         self.set_layout(hbox)
 
 
