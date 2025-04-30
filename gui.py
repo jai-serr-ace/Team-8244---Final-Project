@@ -6,6 +6,8 @@ from PySide6.QtGui import QPalette
 #Styles for the piano keys
 white_keys = 'background-color: white; color: black; border: 5px solid black; height: 1000px; width: 10px; padding: 70px; font-size: 13pt'
 black_keys = 'background-color: black; color: white; border: 5px solid white; height: 500px; width: 10px; padding: 20px; font-size: 8pt'
+white_pressed = 'background-color: yellow; color: black; border: 5px solid black; height: 1000px; width: 10px; padding: 70px; font-size: 13pt' #Remove pressed styles in final build
+black_pressed = 'background-color: yellow; color: white; border: 5px solid white; height: 500px; width: 10px; padding: 20px; font-size: 8pt'
 
 class Piano(QWidget):
     def __init__(self):
@@ -61,8 +63,19 @@ class Piano(QWidget):
         self.white_button7.setStyleSheet(white_keys)
         layout.addWidget(self.white_button7)
         
+        self.white_button1.clicked.connect(self.white_button1_pressed) #These are to test to see if the button presses work
+        self.black_button1.clicked.connect(self.black_button1_pressed) #Removing both these lines in final build
+
         self.setLayout(layout)
         self.show()
+    #Button press tests;
+    @Slot()
+    def white_button1_pressed(self):
+        self.white_button1.setStyleSheet(white_pressed)
+    
+    @Slot()
+    def black_button1_pressed(self):
+        self.black_button1.setStyleSheet(black_pressed)
 #Maybe remove these 3 lines in final build
 app = QApplication([])
 win = Piano()
