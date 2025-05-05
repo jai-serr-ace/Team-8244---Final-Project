@@ -2,7 +2,7 @@ from pydub import AudioSegment
 import numpy as np
 import os
 
-chromatic_scale = ["A4", "A#4", "B4", "C5", "C#5", "D5", "D#5", "E5", "F5", "F#5", "G5", "G#5", "A5"]
+chromatic_scale = ["C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4","A#4","B4","C5"]
 print(chromatic_scale)
 
 def change_pitch(input_file, output_file, semitones):
@@ -17,7 +17,7 @@ def change_pitch(input_file, output_file, semitones):
         print(f"Error: {e}")
 
 def semitoneMaker(note_name, semitone, path):
-    input_wav = "A4.wav"  # Replace with your input WAV file
+    input_wav = "C4.wav"  # Replace with your input WAV file
     output_wav = f"{path}/{note_name}.wav"
     semitones_to_shift = semitone # Shift up by 3 semitones
     change_pitch(input_wav, output_wav, semitones_to_shift)
