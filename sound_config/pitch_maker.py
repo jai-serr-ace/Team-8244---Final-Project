@@ -1,3 +1,4 @@
+#This code must the file 'C4.wav' next to the python file in order to work properly
 from pydub import AudioSegment
 import numpy as np
 import os
