@@ -4,6 +4,7 @@ from PySide6.QtCore import Slot, QUrl, Qt
 from PySide6.QtGui import QPalette
 from PySide6.QtMultimedia import QSoundEffect
 from PySide6.QtGui import QKeyEvent
+from sound_config import pitch_maker
 
 #Styles for the piano keys
 white_keys = 'background-color: white; color: black; border: 5px solid black; height: 1000px; width: 10px; padding: 70px; font-size: 13pt'
@@ -11,9 +12,12 @@ black_keys = 'background-color: black; color: white; border: 5px solid white; he
 white_pressed = 'background-color: yellow; color: black; border: 5px solid black; height: 1000px; width: 10px; padding: 70px; font-size: 13pt' #Remove pressed styles in final build
 black_pressed = 'background-color: yellow; color: white; border: 5px solid white; height: 500px; width: 10px; padding: 20px; font-size: 8pt'
 
+files = ['sound_config/my_notes/C4.wav', 'sound_config/my_notes/C#4.wav', 'sound_config/my_notes/D4.wav', 'sound_config/my_notes/D#4.wav', 'sound_config/my_notes/E4.wav', 'sound_config/my_notes/F4.wav', 'sound_config/my_notes/F#4.wav', 'sound_config/my_notes/G4.wav', 'sound_config/my_notes/G#4.wav', 'sound_config/my_notes/A4.wav', 'sound_congig/my_notes/A#4.wav', 'sound_config/my_notes/B4.wav']
+
 class Piano(QWidget):
     def __init__(self):
         super().__init__()
+        pitch_maker.pitch_maker()
 
         layout = QHBoxLayout()
         self.white_button1 = QPushButton('C')
@@ -107,12 +111,8 @@ class Piano(QWidget):
     def keyPressEvent(self, event: QKeyEvent):
         print(event.key())
         if event.key() == Qt.Key.Key_A:
-            # notePlayer(440, 2)
-            global effect
-            effect = QSoundEffect()
-            effect.setSource(QUrl.fromLocalFile("testAudios/a4.wav"))
-            effect.setVolume(2)
-            effect.play()
+
+            self.white_button1_pressed()
         elif event.key() == Qt.Key.Key_D:
             # notePlayer(830.61, 2)
             global effect2
@@ -140,7 +140,7 @@ class Piano(QWidget):
         self.white_button1.setStyleSheet(white_pressed)
         global effect
         effect = QSoundEffect()
-        effect.setSource(QUrl.fromLocalFile("testAudios/a4.wav"))
+        effect.setSource(QUrl.fromLocalFile(files[0]))
         effect.setVolume(2)
         effect.play()
 
