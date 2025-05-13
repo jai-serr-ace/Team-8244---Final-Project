@@ -44,8 +44,8 @@ class TutorialWindow(QWidget):
             "How to Play Using Our Program!!",
             ( 
                 "Our program allows for users to play whatever melody comes in their head, as well as just fiddling around.\n\n"
-                "To play the white keys / natural notes players must use the keyboard keys: \n\n"
-                "To play the black keys / accidental notes players must use the keyboard keys: \n\n"
+                "To play the white keys / natural notes players must use the keyboard keys: A S D F G H J K\n\n"
+                "To play the black keys / accidental notes players must use the keyboard keys: W E T Y U\n\n"
                 "Important to note that the user can play multiple notes, with some latency.\n\n"
                 "Have fun playing piano!!!\n\n"
             )

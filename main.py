@@ -2,6 +2,7 @@ import sys
 from PySide6.QtWidgets import (QWidget, QApplication, QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QComboBox)
 from PySide6.QtGui import QFont
 from PySide6.QtCore import Slot
+import gui
 # Need to import keyboard press and piano keys in order for open piano button to work as intended.
 
 # Need to also create branch for tutorials, as well as import that for tutorials button to work.
@@ -72,7 +73,7 @@ class MainWindow(QWidget):
 
     def openPianoWindow(self):
         if self.piano_window is None:
-            self.piano_window = PianoWindow()
+            self.piano_window = gui.Piano()
             self.piano_window.show()
         else:
             self.piano_window.raise_()
