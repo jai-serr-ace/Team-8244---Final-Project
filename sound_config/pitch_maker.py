@@ -37,5 +37,3 @@ def pitch_maker():
             ind += 1
             if ind == 13:
                 print("Files created succesfully!")
-
-pitch_maker()
