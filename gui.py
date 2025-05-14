@@ -1,3 +1,7 @@
+#Course: CST205
+#Title: Virtual Piano
+#gui.py Authors: Victor Rodriguez and Douglas McDonald
+#Date: May 14, 2025
 import sys
 from PySide6.QtWidgets import (QApplication, QPushButton, QWidget, QHBoxLayout)
 from PySide6.QtCore import Slot, QUrl, Qt
@@ -6,13 +10,18 @@ from PySide6.QtMultimedia import QSoundEffect
 from PySide6.QtGui import QKeyEvent
 from sound_config import pitch_maker
 
+#Victor worked on the styles for the piano gui. Victor used the setStyleSheet function of PySide6 to style the layout of the keys. There are variables for the white and black keys
+
 #Styles for the piano keys
 white_keys = 'background-color: white; color: black; border: 5px solid black; height: 1000px; width: 10px; padding: 70px; font-size: 13pt'
 black_keys = 'background-color: black; color: white; border: 5px solid white; height: 500px; width: 10px; padding: 20px; font-size: 8pt'
-white_pressed = 'background-color: yellow; color: black; border: 5px solid black; height: 1000px; width: 10px; padding: 70px; font-size: 13pt' #Remove pressed styles in final build
+white_pressed = 'background-color: yellow; color: black; border: 5px solid black; height: 1000px; width: 10px; padding: 70px; font-size: 13pt'
 black_pressed = 'background-color: yellow; color: white; border: 5px solid white; height: 500px; width: 10px; padding: 20px; font-size: 8pt'
 
+#These are the sound files for the notes.
 files = ['sound_config/my_notes/C4.wav', 'sound_config/my_notes/C#4.wav', 'sound_config/my_notes/D4.wav', 'sound_config/my_notes/D#4.wav', 'sound_config/my_notes/E4.wav', 'sound_config/my_notes/F4.wav', 'sound_config/my_notes/F#4.wav', 'sound_config/my_notes/G4.wav', 'sound_config/my_notes/G#4.wav', 'sound_config/my_notes/A4.wav', 'sound_config/my_notes/A#4.wav', 'sound_config/my_notes/B4.wav', 'sound_config/my_notes/C5.wav']
+
+#Victor made the piano class of the gui.py. Victor made and added the buttons to the class. This class makes the entire piano work
 
 class Piano(QWidget):
     def __init__(self):
@@ -72,7 +81,11 @@ class Piano(QWidget):
         self.white_button8.setStyleSheet(white_keys)
         layout.addWidget(self.white_button8)
         
-        self.white_button1.pressed.connect(self.white_button1_pressed) #These are to test to see if the button presses work
+        #Douglas was the one who added the pressed and released for the buttons. The pressed is so the piano will play the notes and light up yellow. 
+        #The released is so that when the keys light up yellow
+        #They will go black to white
+
+        self.white_button1.pressed.connect(self.white_button1_pressed) 
         self.white_button1.released.connect(self.white_button1_released)
 
         self.black_button1.pressed.connect(self.black_button1_pressed)
@@ -115,6 +128,8 @@ class Piano(QWidget):
         self.setLayout(layout)
         self.show()
 
+#Douglas worked on this function that adds the events to each piano keys
+
     def keyPressEvent(self, event: QKeyEvent):
         if event.key() == Qt.Key.Key_A:
             self.white_button1_pressed()
@@ -156,7 +171,7 @@ class Piano(QWidget):
             self.white_button8_pressed()
             self.white_button8_released()
 
-    #Button press tests;
+    #Douglas worked on the @Slots for the piano keys. These allow for the piano keys to work correctly.
     @Slot()
     def white_button1_pressed(self):
         self.white_button1.setStyleSheet(white_pressed)
