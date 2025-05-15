@@ -1,8 +1,16 @@
+# Course: CST205 - Multimedia Design & Programming 
+# Title: User Tutorials File
+# Authors: Leonardo Lopez
+# Date: 5/14/2025
+# Description: User tutorials, this creates a window that meant for the user to understand / learn
+# basic music theory, piano keys, and how to use our project | They are also able to go from topic to 
+# topic using a 'foward' button and 'previous' button
 import sys
 from PySide6.QtWidgets import (QWidget, QApplication, QVBoxLayout, QLabel, QHBoxLayout, QPushButton, QComboBox, QMainWindow, QStackedLayout)
 from PySide6.QtGui import QFont
 from PySide6.QtCore import Slot
 
+# This creates the window, naming it Tutorials and sizing it 
 class TutorialWindow(QWidget):
     def __init__(self):
         super().__init__()
@@ -44,8 +52,8 @@ class TutorialWindow(QWidget):
             "How to Play Using Our Program!!",
             ( 
                 "Our program allows for users to play whatever melody comes in their head, as well as just fiddling around.\n\n"
-                "To play the white keys / natural notes players must use the keyboard keys: A S D F G H J K\n\n"
-                "To play the black keys / accidental notes players must use the keyboard keys: W E T Y U\n\n"
+                "To play the white keys / natural notes players must use the keyboard keys: 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K'\n\n"
+                "To play the black keys / accidental notes players must use the keyboard keys:  'W', 'E', 'T', 'Y', 'U'\n\n"
                 "Important to note that the user can play multiple notes, with some latency.\n\n"
                 "Have fun playing piano!!!\n\n"
             )
@@ -70,6 +78,7 @@ class TutorialWindow(QWidget):
         main_layout.addLayout(nav_layout)
         self.setLayout(main_layout)
 
+    # Pages! make the layout, have a title with big font, and content with samll font
     def add_page(self, title: str, content: str):
         page = QWidget()
         layout = QVBoxLayout()
@@ -93,7 +102,7 @@ class TutorialWindow(QWidget):
 
         self.stacked_layout.addWidget(page)
         self.pages.append(page)
-
+    # Making sure that fwd btn works
     def go_next(self):
         current_index = self.stacked_layout.currentIndex()
         if current_index < len(self.pages) - 1:
@@ -101,7 +110,7 @@ class TutorialWindow(QWidget):
             self.prev_button.setEnabled(True)
         if current_index + 1 == len(self.pages) - 1:
             self.next_button.setEnabled(False)
-
+    # Making sure that prev btn works
     def go_previous(self):
         current_index = self.stacked_layout.currentIndex()
         if current_index > 0:
@@ -111,6 +120,8 @@ class TutorialWindow(QWidget):
             self.prev_button.setEnabled(False)
 
 tutorial_window = None  
+
+# This block of code ensures that the tutorial window stays open and doesn't close automatically 
 
 def open_window():
     global tutorial_window
